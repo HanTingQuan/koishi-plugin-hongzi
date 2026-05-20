@@ -36,10 +36,10 @@ export function apply(ctx: Context, config: Config) {
     .option('debug', '-d 显示调用栈。')
     .action(async ({ session, options = {} }, message) => {
       if (!message.includes('[[') || !message.includes(']]'))
-        return h.text(message)
+        return message
       const res = await translate.call({ ctx, config }, message, omit(options, ['debug']))
       options.debug && await session?.send(res.callstack)
-      return h.text(res.translated)
+      return res.translated
     })
 
   config.interpolate && ctx.middleware(async (session, next) => {
