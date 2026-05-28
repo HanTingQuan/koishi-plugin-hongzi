@@ -12,9 +12,9 @@ export interface Config {
 }
 
 export const Config: Schema<Config> = Schema.object({
-  command: Schema.boolean().default(true).description('启用命令。'),
-  interpolate: Schema.boolean().default(true).description('启用插值。'),
-  endpoint: Schema.string().role('link').default('http://pbhh.net:8426').description('字典接口地址。'),
+  command: Schema.boolean().default(true).description('启用命令'),
+  interpolate: Schema.boolean().default(true).description('启用插值'),
+  endpoint: Schema.string().role('link').default('http://pbhh.net:8426').description('字典接口地址'),
 })
 
 export function apply(ctx: Context, config: Config) {
@@ -29,8 +29,8 @@ export function apply(ctx: Context, config: Config) {
     })
   }
 
-  config.command && ctx.command('hongzi <message:text>', '薨机的填字。')
-    .option('debug', '-d 显示调用栈。')
+  config.command && ctx.command('hongzi <message:text>', '薨机的填字')
+    .option('debug', '-d 显示调用栈')
     .action(async ({ session, options = {} }, message) => {
       if (!message.includes('[[') || !message.includes(']]'))
         return message
